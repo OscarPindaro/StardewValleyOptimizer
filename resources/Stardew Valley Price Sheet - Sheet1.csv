@@ -1,0 +1,52 @@
+,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,Item,Type,Season,Seed Price,Growth Time,Regrowth Time,Yield per Harvest,"Max Harvests
+per Season",Revenue Per Item,,,,Revenue Per Item Per Processing Day,,,,Profit Per Item,,,Seasonal Revenue Per Square,,,Seasonal Profit Per Square,,,,
+,,,,,,,,,Raw Price,Jar Price,Keg Price,Cask Price,Raw Price/Day,Jar Price/Day,Keg Price/Day,Cask Price/Day,Raw Profit,Jar Profit,Keg Profit,Raw,Jar,Keg,Raw2,Jar2,Keg2,,
+,Blackberry,Foragable,Fall,-,-,-,1,-,20,90,60,120,-,30,8,-,20,90,60,-,-,-,-,-,-,,
+,Crystal Fruit,Foragable,Winter,-,-,-,1,-,150,350,450,900,-,116,64,-,150,350,450,-,-,-,-,-,-,,
+,Salmonberry,Foragable,Spring,-,-,-,1,-,5,60,15,30,-,20,2,-,5,60,15,-,-,-,-,-,-,,
+,Spice Berry,Foragable,Summer,-,-,-,1,-,80,210,240,480,-,70,34,-,80,210,240,-,-,-,-,-,-,,Important Notes
+,Wild Plum,Foragable,Fall,-,-,-,1,-,80,210,240,480,-,70,34,-,80,210,240,-,-,-,-,-,-,,Numbers have been rounded down every time.
+,Ancient Fruit,Fruit,Multi-Season,-,28,7,1,4,550,1150,1650,3300,78,115,117,45,550,1150,1650,2200,4600,6600,2200,4600,6600,,"Processing days have been measured for crops that regrow by the days it takes to
+regrow them. Processing days have been measured for all other crops by their
+normal growth time."
+,Apple,Fruit,Multi-Season,4000,28,1,1,28,100,250,300,600,100,62,37,9,-3900,-3750,-3700,2800,7000,8400,-1200,3000,4400,,
+,Apricot,Fruit,Multi-Season,2000,28,1,1,28,50,150,150,300,50,37,18,4,-1950,-1850,-1850,1400,4200,4200,-600,2200,2200,,
+,Blueberry,Fruit,Summer,80,13,4,3,4,50,150,150,300,12,21,13,4,-30,70,70,600,1800,1800,520,1720,1720,,"Processing days are cumulative - I count the total amount of time from planting the
+seed to selling the final product. This might make my numbers very different from what
+you expect for that section."
+,Cactus Fruit,Fruit,Indoors,150,12,3,1,6,75,200,225,450,6,95,11,6,-75,50,75,450,1200,1350,300,1050,1200,,
+,Cherry,Fruit,Multi-Season,3400,28,1,1,28,80,210,240,480,80,52,30,7,-3320,-3190,-3160,2240,5880,6720,-1160,2480,3320,,
+,Cranberry,Fruit,Fall,240,7,5,2,5,75,200,225,450,15,25,18,6,-165,-40,225,750,2000,2250,510,1760,2010,,Tree fruits are labeled Multi-Season because they survive once the season is over.
+,Grape,Fruit,Fall,60,10,3,1,6,80,210,240,480,26,35,24,7,20,150,180,480,1260,1440,420,1200,1380,,Item Profit represents the first harvest only.
+,Melon,Fruit,Summer,80,12,-,1,2,250,550,750,1500,20,395,39,19,170,470,670,500,1100,1500,340,1020,1420,,"""Per Square"" refers to a single square on your farm wherein only one crop can be
+planted at a time."
+,Orange,Fruit,Multi-Season,4000,28,1,1,28,100,250,300,600,100,62,37,9,-3900,-3750,-3700,2800,7000,8400,-1200,3000,4400,,
+,Peach,Fruit,Multi-Season,6000,28,1,1,28,140,330,420,840,140,82,52,12,-5860,-5670,-5580,3920,9240,11760,-2080,3240,5760,,"Seasonal Profit for Multi-Season crops represent the first season they were planted
+EXCEPT in the case of crops that take all season to grow (Tree fruits, Ancient Fruit)
+in which case they represent the first season they could be harvested."
+,Pomegranate,Fruit,Multi-Season,6000,28,1,1,28,140,330,420,840,140,82,52,12,-5860,-5670,-5580,3920,9240,11760,-2080,3240,5760,,
+,Rhubarb,Fruit,Spring,100,13,-,1,2,220,490,660,1320,16,396,33,16,120,390,560,440,980,1320,240,880,1220,,
+,Starfruit,Fruit,Summer,400,13,-,1,2,750,1550,2250,4500,57,83,112,57,350,1150,1850,1500,3100,4500,700,2700,4100,,
+,Strawberry,Fruit,Spring,100,8,4,1,5,120,290,360,720,30,41,32,10,20,190,260,600,1450,1800,500,1350,1700,,
+,Sweet Gem Berry,Fruit,Fall,1000,24,-,1,1,3000,6050,9000,18000,125,94,290,202,2000,5050,8000,3000,6050,9000,2000,5050,8000,,
+,Amaranth,Vegetable,Fall,70,7,-,1,4,150,350,337,-,21,27,24,-,80,280,267,600,1400,1348,320,1330,1278,,
+,Artichoke,Vegetable,Fall,30,8,-,1,3,160,370,360,-,20,28,24,-,130,340,330,480,1110,1080,390,1080,1050,,
+,Beet,Vegetable,Fall,20,6,-,1,4,100,250,225,-,16,26,17,-,80,230,205,400,1000,900,320,980,880,,
+,Bok Choy,Vegetable,Fall,50,4,-,1,6,80,210,180,-,20,24,16,-,30,160,130,480,1260,1080,180,1210,1030,,
+,Cauliflower,Vegetable,Spring,80,12,-,1,2,175,400,393,-,14,32,20,-,95,320,313,350,800,786,190,720,706,,
+,Corn,Vegetable,Multi-Season,150,14,4,1,4,50,150,112,-,12,21,10,-,-100,0,-38,200,600,448,50,450,298,,
+,Eggplant,Vegetable,Fall,20,5,5,1,5,60,170,135,-,12,21,11,-,40,150,115,300,850,675,280,830,655,,
+,Garlic,Vegetable,Spring,40,4,-,1,6,60,170,135,-,15,24,12,-,20,130,95,360,1020,810,120,980,770,,
+,Green Bean,Vegetable,Spring,60,10,3,1,6,40,130,90,-,13,21,9,-,-20,70,30,240,780,540,180,720,480,,
+,Hops,Vegetable,Summer,60,11,1,1,17,25,100,56,-,25,25,7,-,-35,40,-4,425,1700,952,365,1640,892,,
+,Hot Pepper,Vegetable,Summer,40,5,3,1,8,40,130,90,-,13,21,9,-,0,90,50,320,1040,720,280,1000,680,,
+,Kale,Vegetable,Spring,70,6,-,1,4,110,270,247,-,18,26,19,-,40,200,177,440,1080,988,160,1010,918,,
+,Parsnip,Vegetable,Spring,20,4,-,1,6,35,120,78,-,8,24,7,-,15,100,58,210,720,468,90,700,448,,
+,Potato,Vegetable,Spring,50,6,-,1.2,4,80,210,180,-,13,26,13,-,30,160,130,384,1008,864,184,958,814,,
+,Pumpkin,Vegetable,Fall,100,13,-,1,2,320,690,720,-,24,33,36,-,220,590,620,640,1380,1440,440,1280,1340,,
+,Radish,Vegetable,Summer,40,6,-,1,4,90,230,202,-,15,26,15,-,50,190,162,360,920,808,200,880,768,,
+,Red Cabbage,Vegetable,Summer,100,9,-,1,3,260,570,585,-,28,29,36,-,160,470,485,780,1710,1755,480,1610,1655,,
+,Tomato,Vegetable,Summer,50,11,4,1,5,60,170,135,-,15,24,12,-,10,120,85,300,850,675,250,800,625,,
+,Wheat,Vegetable,Summer or Fall,10,4,-,1,6,25,100,56,-,6,24,5,-,15,90,46,150,600,336,90,590,326,,
+,Yam,Vegetable,Fall,60,10,-,1,2,160,370,360,-,16,30,21,-,100,310,300,320,740,720,200,680,660,,
