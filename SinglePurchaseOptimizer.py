@@ -159,14 +159,8 @@ for crop in cropList:
     durations[crop.name] = duration
 
 #removing all the crops with duration equal to 0
-for crop in cropList:
-    print(crop.name, durations[crop.name])
-
-print()
 """select only the crops that can grow and will grow completely in the chosen period """
 cropList = [crop for crop in cropList if durations[crop.name]>0 and crop.growthTime<=durations[crop.name]]
-for crop in cropList:
-    print(crop.name)
 
 #alpha, number of times i will harvest the colture
 alpha= {}
