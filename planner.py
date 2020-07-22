@@ -91,7 +91,9 @@ totalDuration = sum(res)+1
 """select only the crops that can grow and will grow completely in the chosen period """
 cropList = [crop for crop in cropList if durations[crop.name]>0 and crop.growthTime<=durations[crop.name]]
 
-"""Need to find the first and last day its active"""
+"""Need to find the first and last day its active. lowerDate is the offset from the current
+    day ( so 0 if i can begin today)
+"""
 lowerDate = {}
 upperDate = {}
 for crop in cropList:
@@ -102,7 +104,7 @@ for crop in cropList:
     else:
         lowerDate[crop.name] = springDays + summerDays
 
-    upperDate[crop.name] = lowerDate[crop.name] + durations[crop.name]
+    upperDate[crop.name] = lowerDate[crop.name] + durations[crop.name] -1
 
 
 """Now variables"""
@@ -208,11 +210,12 @@ for crop in cropList:
 """SEASONALITY CONSTRAINT: a plant can be planted only in its season """
 for crop in cropList:
     for day in range(0, totalDuration):
-        if( day < lowerDate[crop.name] or day >= upperDate[crop.name]):
+        """+ growthTime becuase must be 0 if plat day + grow time is outside the season"""
+        if( day < lowerDate[crop.name] or day +crop.growthTime >= upperDate[crop.name]):
             prob += amounts[(crop.name, day)] == 0
 
 
-status = prob.solve(PULP_CBC_CMD(timeLimit=10))
+status = prob.solve(PULP_CBC_CMD(timeLimit=120))
 
 #print(prob)
 
@@ -233,9 +236,17 @@ for day in range(0, totalDuration):
         for crop in cropList:
             if amounts[(crop.name, day)].value() >0:
                 print("{} = {}, harvest at {}".format(crop.name, amounts[(crop.name, day)].value(), numberToDate(numberToDate(start_date, day), crop.growthTime)))
-                print(crop.seasons)
+                #print(crop.seasons)
         print()
 
-print(numberToDate(start_date,0))
-print(numberToDate(start_date,27))
-print(convertDate(start_date))
+# print(numberToDate(start_date,0))
+# print(numberToDate(start_date,27))
+# print(convertDate(start_date))
+#
+# print("start_date" ,convertDate(start_date), "end_date", convertDate(end_date))
+# for x in lowerDate:
+#     print("{} {}".format(x, lowerDate[x]))
+#     print("{} {}\n".format(x, upperDate[x]))
+# print(totalDuration)
+# for x in a:
+#     print(x, a[x])

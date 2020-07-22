@@ -27,32 +27,32 @@ def assignDays(dayStart, dayEnd):
     summerDays = 0
     autumnDays =0
 
-    if 28 in range(dayStart, dayEnd):
-        endMonth.append(28)
-    if 56 in range(dayStart, dayEnd):
-        endMonth.append(56)
+    if 27 in range(dayStart, dayEnd):
+        endMonth.append(27)
+    if 55 in range(dayStart, dayEnd):
+        endMonth.append(55)
 
     if len(endMonth) == 0:
-        if dayStart<=28:
+        if dayStart<=27:
             springDays = dayEnd -dayStart+1
-        elif dayStart in range(29, 57):
+        elif dayStart in range(28, 56):
             summerDays =  dayEnd -dayStart+1
         else:
             autumnDays = dayEnd -dayStart+1
 
-    elif 28 in endMonth:
-        springDays = 28 - dayStart +1
-        if 56 in endMonth:
+    elif 27 in endMonth:
+        springDays = 27 - dayStart +1
+        if 55 in endMonth:
             summerDays = 28
-            autumnDays = dayEnd - 57 + 1
+            autumnDays = dayEnd - 56 + 1
         else:
-            summerDays = dayEnd - 29 +1
+            summerDays = dayEnd - 28 +1
             autumnDays = 0;
     else:
         springDays=0;
-        if 56 in endMonth:
-            summerDays = 56 - dayStart +1
-            autumnDays = dayEnd - 57 + 1
+        if 55 in endMonth:
+            summerDays = 55 - dayStart +1
+            autumnDays = dayEnd - 56 + 1
         else:
             summerDays =  dayEnd -dayStart+1
 
