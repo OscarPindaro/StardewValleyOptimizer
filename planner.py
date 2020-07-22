@@ -32,15 +32,13 @@ for crop in crops:
             x.setRegrowTime(crop.get("regrow"))
         x.addSeason(crop.get("seasons"))
         cropList.append(x)
-        #print(x)
-        #print("\n")
 
 # The followings are the input of the program.
 # $N$ : the number of available tiles <br>
 # $D$ : number of days available <br>
 # $M$ : total amount of money available <br>
 
-if len(sys.argv) !=6:
+if len(sys.argv) != 6:
     print("Not enough arguments. Write starting date and ending date")
     print('"start date" "end date" money tiles delta')
     quit()
@@ -59,11 +57,10 @@ springDays = res[0]
 summerDays = res[1]
 autumnDays = res[2]
 
-
 #number of tiles available
-N = int(sys.argv[4])
-#number of money available
 M = int(sys.argv[3])
+#number of money available
+N = int(sys.argv[4])
 #percentage to keep after obtaining a revenue
 delta = float(sys.argv[5])
 
@@ -81,9 +78,25 @@ for crop in cropList:
         duration = duration + autumnDays
     durations[crop.name] = duration
 
+
+
 #removing all the crops with duration equal to 0
 """select only the crops that can grow and will grow completely in the chosen period """
 cropList = [crop for crop in cropList if durations[crop.name]>0 and crop.growthTime<=durations[crop.name]]
+
+"""Need to find the first and last day its active"""
+lowerDate = {}
+upperDate = {}
+for crop in cropList:
+    if "spring" in crop.seasons:
+        lowerDate[crop.name] = 0
+    elif "summer" in crop.seasons:
+        lowerDate[crop.name] = springDays
+    else:
+        lowerDate[crop.name] = springDays + summerDays
+
+    upperDate[crop.name] = lowerDate[crop.name] + durations[crop.name]
+
 
 """Now variables"""
 """First of all amounts. check if the number of varibales can be lowered"""
@@ -91,7 +104,6 @@ amounts = {}
 for crop in cropList:
     for day in range(0, totalDuration):
         amounts[(crop.name, day)] = LpVariable("{}_{:02d}".format(crop.name, day),0, cat="Integer")
-
 
 """Costs at every day"""
 costs = {}
@@ -115,7 +127,7 @@ for crop in cropList:
                 """the condition >0 is necessary, in this way i set to 0 all the  variables
                 before the first firstRevenue. The first condition ensures that i'm considering
                 multiples of the regrowth time"""
-                if (k - firstRevenue) % crop.regrow == 0 and k > firstRevenue:
+                if (k - firstRevenue) % crop.regrow == 0 and k > firstRevenue and k in range(lowerDate[crop.name], upperDate[crop.name]):
                     a[(crop.name, day, k)] = amounts[(crop.name, day)]
                 else:
                     a[(crop.name, day, k)] = 0;
@@ -151,7 +163,7 @@ for crop in cropList:
             if crop.regrow > 0:
                 """per adesso lo faccio così ma non considera che ad una certa le togli
                 ste piante, perchè finisce la loro stagione. Problema anche negli altri"""
-                if (k >= day and k <= totalDuration):
+                if (k >= day and k <= upperDate[crop.name]):
                     b[(crop.name, day, k)] = amounts[(crop.name, day)]
                 else:
                     b[(crop.name, day, k)] = 0
@@ -186,13 +198,16 @@ for crop in cropList:
     for day in range(0,totalDuration):
         a[(crop.name, day, totalDuration-1)] = 0
 
+"""SEASONALITY CONSTRAINT: a plant can be planted only in its season """
+for crop in cropList:
+    for day in range(0, totalDuration):
+        if( day < lowerDate[crop.name] or day >= upperDate[crop.name]):
+            prob += amounts[(crop.name, day)] == 0
 
 
+status = prob.solve(PULP_CBC_CMD(timeLimit=300))
 
-
-status = prob.solve()
-
-print(prob)
+#print(prob)
 
 print("Status:", LpStatus[prob.status])
 print("spring days =", springDays)
@@ -200,6 +215,7 @@ print("summer days =", summerDays)
 print("autumn days =", autumnDays)
 print("total number of days =", springDays+summerDays+autumnDays)
 print("Starting Money =", M, "Money Spent =", sum([costs[i].value() for i in costs]) )
+print("Tiles = {}".format(N))
 print("Profit = {}".format(prob.objective.value()))
 
 vars = [amounts[(crop.name, day)] for crop in cropList for day in range(0, totalDuration)]
