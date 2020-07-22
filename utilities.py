@@ -63,9 +63,25 @@ def convertDate(date):
     splitted = date.split(" ")
     day = int(splitted[0])
     if "spring"  == splitted[1].lower():
-        day = day +0;
+        day = day +0 -1;
     elif "summer" == splitted[1].lower():
-        day = day + 28
+        day = day + 28 -1
     else:
-        day = day +56
-    return day    
+        day = day +56 -1
+    return day
+
+def numberToDate(start_date, dayNumber):
+    startNum = convertDate(start_date)
+    today = startNum + dayNumber
+    day = int(today%28)
+    month = int(today / 28)
+    if month == 0:
+        return str(day+1) + " Spring"
+    elif month == 1:
+        return str(day+1) + " Summer"
+    elif month >=2:
+        return str(day+1) + " Fall"
+    else:
+
+        print("Errroreeeee month={}".format(month))
+        quit()

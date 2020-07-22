@@ -6,6 +6,32 @@ from pulp import *
 import sys
 from utilities import *
 
+def createCropList(jsonCrops, ignore):
+    cropList = []
+    for crop in jsonCrops:
+        if(ignore[crop.get("name")] != 1):
+            x = Crop(crop.get("name"), crop.get("buy"), crop.get("sell"), sum([int(x) for x in crop.get("stages")]))
+            if(crop.get("regrow")):
+                x.setRegrowTime(crop.get("regrow"))
+            x.addSeason(crop.get("seasons"))
+            cropList.append(x)
+    return cropList
+
+def setDurations(cropList, seasonTuple):
+    durations = {}
+    """ +1 because the revenue is calculated after 1 day """
+    totalDuration = sum(seasonTuple) + 1
+    for crop in cropList:
+        duration = 0
+        if "spring" in crop.seasons:
+            duration = duration + springDays
+        if "summer" in crop.seasons:
+            duration = duration + summerDays
+        if "fall" in crop.seasons:
+            duration = duration + autumnDays
+        durations[crop.name] = duration
+    return durations
+
 csvFile = open("resources/userPreferences.csv")
 csvReader = csv.DictReader(csvFile)
 
@@ -24,15 +50,7 @@ data = json.load(jsonFile)
 
 crops = data.get("crops")
 
-cropList = []
-for crop in crops:
-    if(ignore[crop.get("name")] != 1):
-        x = Crop(crop.get("name"), crop.get("buy"), crop.get("sell"), sum([int(x) for x in crop.get("stages")]))
-        if(crop.get("regrow")):
-            x.setRegrowTime(crop.get("regrow"))
-        x.addSeason(crop.get("seasons"))
-        cropList.append(x)
-
+cropList = createCropList(crops, ignore)
 # The followings are the input of the program.
 # $N$ : the number of available tiles <br>
 # $D$ : number of days available <br>
@@ -65,19 +83,8 @@ N = int(sys.argv[4])
 delta = float(sys.argv[5])
 
 #duration of each crops
-durations = {}
-""" +1 because the revenue is calculated after 1 day """
-totalDuration = sum(res) + 1
-for crop in cropList:
-    duration = 0
-    if "spring" in crop.seasons:
-        duration = duration + springDays
-    if "summer" in crop.seasons:
-        duration = duration + summerDays
-    if "fall" in crop.seasons:
-        duration = duration + autumnDays
-    durations[crop.name] = duration
-
+durations = setDurations(cropList, res)
+totalDuration = sum(res)+1
 
 
 #removing all the crops with duration equal to 0
@@ -205,7 +212,7 @@ for crop in cropList:
             prob += amounts[(crop.name, day)] == 0
 
 
-status = prob.solve(PULP_CBC_CMD(timeLimit=300))
+status = prob.solve(PULP_CBC_CMD(timeLimit=10))
 
 #print(prob)
 
@@ -222,8 +229,13 @@ vars = [amounts[(crop.name, day)] for crop in cropList for day in range(0, total
 print()
 for day in range(0, totalDuration):
     if sum([amounts[(crop.name, day)].value() for crop in cropList]) > 0:
-        print("Day {}".format(day+1))
+        print("{}".format(numberToDate( start_date ,day)))
         for crop in cropList:
             if amounts[(crop.name, day)].value() >0:
-                print("{} = {}".format(crop.name, amounts[(crop.name, day)].value()))
+                print("{} = {}, harvest at {}".format(crop.name, amounts[(crop.name, day)].value(), numberToDate(numberToDate(start_date, day), crop.growthTime)))
+                print(crop.seasons)
         print()
+
+print(numberToDate(start_date,0))
+print(numberToDate(start_date,27))
+print(convertDate(start_date))
